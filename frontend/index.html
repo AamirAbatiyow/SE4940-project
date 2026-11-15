@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+
+        <nav>
+            <h2>BookNest</h2>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#books">Books</a>
+                <a href="#cart">Cart</a>
+                <a href="#login">Login</a>
+            </div>
+        </nav>
+
+
+</header>
+
+
+<main>
+    <section class="hero">
+        <p class="hero-label">WELCOME TO BOOKNEST</p>
+
+        <h1>Your Next Great Read Starts Here</h1>
+
+        <p class="hero-description">
+            Explore our collection of books and discover
+            stories worth getting lost in.
+        </p>
+
+        <a href="#books" class="hero-button">
+            Browse Books
+        </a>
+    </section>
+
+    <section id="books" class="books-section">
+        <h2>Explore Our Books</h2>
+        <p>Discover something worth reading.</p>
+
+        <div class="book-grid">
+
+            <article class="book-card">
+                <div class="book-cover">The Great Gatsby</div>
+                <h3>The Great Gatsby</h3>
+                <p>F. Scott Fitzgerald</p>
+                <p class="book-price">$12.99</p>
+                <button type="button" onclick="addToCart('The Great Gatsby')">
+                    Add to Cart
+                </button>            </article>
+
+            <article class="book-card">
+                <div class="book-cover">Pride and Prejudice</div>
+                <h3>Pride and Prejudice</h3>
+                <p>Jane Austen</p>
+                <p class="book-price">$10.99</p>
+                <button type="button" onclick="addToCart('Pride and Prejudice')">
+                    Add to Cart
+                </button>               </article>
+
+            <article class="book-card">
+                <div class="book-cover">1984</div>
+                <h3>1984</h3>
+                <p>George Orwell</p>
+                <p class="book-price">$14.99</p>
+                <button type="button" onclick="addToCart('1984')">
+                    Add to Cart
+                </button>            </article>
+
+            <article class="book-card">
+                <div class="book-cover">To Kill a Mockingbird</div>
+                <h3>To Kill a Mockingbird</h3>
+                <p>Harper Lee</p>
+                <p class="book-price">$13.99</p>
+                <button type="button" onclick="addToCart('To Kill a Mockingbird')">
+                    Add to Cart
+                </button>           </article>
+
+        </div>
+    </section>
+
+    <section id="cart" class="cart-section">
+        <h2>Your Shopping Cart</h2>
+        <p>Books you've selected:</p>
+
+        <ul id="cart-items"></ul>
+
+        <p id="cart-count">Total items: 0</p>
+    </section>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
