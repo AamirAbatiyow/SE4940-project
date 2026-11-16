@@ -1,343 +1,166 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Browser tab title -->
-    <title>Fu Flips | Good Books. Great Escapes.</title>
-
-    <!-- Website styling -->
+    <title>Fu Flips</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- HEADER: Logo and navigation -->
 <header>
     <nav>
-        <h2 class="brand">
-            <a href="#books">
-                <svg class="brand-book-icon"
-                     xmlns="http://www.w3.org/2000/svg"
-                     width="28"
-                     height="28"
-                     viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.6"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                     aria-hidden="true">
-                    <path d="M12 7.5C9.5 5.5 6 5 2.5 5.5V19c3.5-.5 7-.2 9.5 2"/>
-                    <path d="M12 7.5c2.5-2 6-2.5 9.5-2V19c-3.5-.5-7-.2-9.5 2"/>
-                    <path d="M12 7.5V21"/>
-                </svg>
-                Fu Flips<span class="brand-dot">.</span></a>
-        </h2>
-
+        <h2><a href="#books">Fu Flips</a></h2>
         <div class="nav-links">
             <a href="#books" data-nav="books">Books</a>
             <a href="#cart" data-nav="cart" id="nav-cart">Cart</a>
             <a href="#login" data-nav="login" id="nav-login">Login</a>
-
-            <!-- Displays account details when logged in -->
             <span id="nav-session" class="nav-session" hidden>
                 <span id="nav-user"></span>
                 <a href="#orders" data-nav="orders" id="nav-orders">Orders</a>
-                <button type="button" id="logout-button" class="nav-logout">
-                    Logout
-                </button>
+                <button type="button" id="logout-button" class="nav-logout">Logout</button>
             </span>
         </div>
     </nav>
 </header>
 
 <main>
-
-    <!-- BOOKS PAGE: Hero, search and catalog -->
     <section id="books" class="books-section" data-view="books">
+        <h2>Explore Our Books</h2>
+        <p>Discover something worth reading.</p>
 
-        <!-- Hero introduction -->
-        <div class="hero">
-            <div class="hero-content">
-                <p class="hero-label">WELCOME TO FU FLIPS</p>
-
-                <h1>
-                    Good books.<br>
-                    <span>Great escapes.</span>
-                </h1>
-
-                <p class="hero-description">
-                    For the stories that stay with you, the characters
-                    you can't forget, and the books you just can't put down.
-                    Your next favorite read starts here.
-                </p>
-
-                <a href="#catalog" class="hero-button">
-                    Explore the shelves
-                </a>
-            </div>
-
-            <!-- Decorative typography -->
-            <div class="hero-art" aria-hidden="true">
-                <span class="hero-art-small">JUST ONE MORE</span>
-                <span class="hero-art-large">CHAPTER</span>
-                <span class="hero-art-bottom">AND THEN ANOTHER.</span>
-            </div>
-        </div>
-
-        <!-- Catalog heading -->
-        <div id="catalog" class="catalog-heading">
-            <div>
-                <p class="section-label">THE BOOKSHELF</p>
-                <h2>Find your next obsession.</h2>
-                <p>Something for every kind of reader.</p>
-            </div>
-        </div>
-
-        <!-- Search connects to existing JavaScript -->
         <form id="search-form" class="search-row">
-            <input
-                    id="search-input"
-                    type="search"
-                    name="q"
-                    placeholder="Search by title or author"
-                    aria-label="Search by title or author"
-            >
-            <button type="submit" class="action-button">
-                Search
-            </button>
+            <input id="search-input" type="search" name="q" placeholder="Search by title or author" aria-label="Search by title or author">
+            <button type="submit" class="action-button">Search</button>
         </form>
-
-        <!-- JavaScript displays catalog messages here -->
         <p id="books-message" class="message" role="status" hidden></p>
-
-        <!-- Books are generated here from the backend -->
         <div id="book-grid" class="book-grid"></div>
-
-        <!-- Catalog pagination -->
         <div class="pager">
-            <button type="button" id="books-prev" class="action-button" disabled>
-                Previous
-            </button>
-
+            <button type="button" id="books-prev" class="action-button" disabled>Previous</button>
             <span id="books-page" aria-live="polite"></span>
-
-            <button type="button" id="books-next" class="action-button" disabled>
-                Next
-            </button>
+            <button type="button" id="books-next" class="action-button" disabled>Next</button>
         </div>
-
-        <!-- Individual book details -->
         <article id="book-detail" class="book-card book-detail" hidden></article>
     </section>
 
-    <!-- CART PAGE: Items and checkout -->
     <section id="cart" class="cart-section" data-view="cart" hidden>
-        <p class="section-label">YOUR LITTLE BOOK HAUL</p>
         <h2>Your Shopping Cart</h2>
-
-        <p id="cart-intro">Good stories deserve a spot on your shelf.</p>
-
+        <p id="cart-intro">Books you've selected:</p>
         <p id="cart-message" class="message" role="status" hidden></p>
-
-        <!-- Cart items generated by JavaScript -->
         <ul id="cart-items"></ul>
-
         <p id="cart-count"></p>
-
-        <!-- Checkout form -->
         <form id="checkout-form" class="book-card" hidden>
-            <h3>Ready to make them yours?</h3>
-            <p class="hint">Choose a payment method to place your order.</p>
-
-            <label class="field">
-                Payment method
+            <h3>Checkout</h3>
+            <p class="hint">Pay with a credit card or PayPal.</p>
+            <label class="field">Payment method
                 <select id="payment-method">
                     <option value="credit_card">Credit card</option>
                     <option value="paypal">PayPal</option>
                 </select>
             </label>
-
             <button type="submit">Place order</button>
         </form>
-
         <p id="checkout-message" class="message" role="status" hidden></p>
         <div id="checkout-result"></div>
     </section>
 
-    <!-- LOGIN PAGE: Sign in and registration -->
     <section id="login" class="page-section" data-view="login" hidden>
-        <p class="section-label">THE READING CLUB</p>
-        <h2>Welcome back, book lover.</h2>
-
-        <p id="login-hint" class="hint">
-            Log in or create a buyer or staff account.
-        </p>
-
+        <h2>Login</h2>
+        <p id="login-hint" class="hint">Log in or create a buyer or staff account.</p>
         <p id="auth-message" class="message" role="status" hidden></p>
 
         <div id="auth-forms" class="form-grid">
-
-            <!-- Existing login form -->
             <form id="login-form" class="book-card">
                 <h3>Log in</h3>
-
-                <label class="field">
-                    Email
-                    <input id="login-email" type="email"
-                           autocomplete="username" required>
+                <label class="field">Email
+                    <input id="login-email" type="email" autocomplete="username" required>
                 </label>
-
-                <label class="field">
-                    Password
-                    <input id="login-password" type="password"
-                           autocomplete="current-password" required>
+                <label class="field">Password
+                    <input id="login-password" type="password" autocomplete="current-password" required>
                 </label>
-
                 <button type="submit">Log in</button>
             </form>
 
-            <!-- Existing registration form -->
             <form id="register-form" class="book-card">
                 <h3>Create an account</h3>
-
-                <label class="field">
-                    Name
-                    <input id="register-name" type="text"
-                           autocomplete="name" required>
+                <label class="field">Name
+                    <input id="register-name" type="text" autocomplete="name" required>
                 </label>
-
-                <label class="field">
-                    Email
-                    <input id="register-email" type="email"
-                           autocomplete="email" required>
+                <label class="field">Email
+                    <input id="register-email" type="email" autocomplete="email" required>
                 </label>
-
-                <label class="field">
-                    Password
-                    <input id="register-password" type="password"
-                           autocomplete="new-password" required>
+                <label class="field">Password
+                    <input id="register-password" type="password" autocomplete="new-password" required>
                 </label>
-
-                <label class="field">
-                    Role
+                <label class="field">Role
                     <select id="register-role">
                         <option value="buyer">Buyer</option>
                         <option value="staff">Staff</option>
                     </select>
                 </label>
-
-                <label class="field" id="shipping-field">
-                    Shipping address
-                    <textarea id="register-shipping" rows="3"
-                              autocomplete="street-address"></textarea>
+                <label class="field" id="shipping-field">Shipping address
+                    <textarea id="register-shipping" rows="3" autocomplete="street-address"></textarea>
                 </label>
-
-                <label class="field" id="job-field" hidden>
-                    Job title
-                    <input id="register-job" type="text"
-                           autocomplete="organization-title">
+                <label class="field" id="job-field" hidden>Job title
+                    <input id="register-job" type="text" autocomplete="organization-title">
                 </label>
-
                 <button type="submit">Create account</button>
             </form>
         </div>
     </section>
 
-    <!-- ORDERS PAGE: Purchase history and staff tools -->
     <section id="orders" class="page-section" data-view="orders" hidden>
-        <p class="section-label">YOUR READING JOURNEY</p>
         <h2 id="orders-heading">Your Orders</h2>
-
-        <p id="orders-hint" class="hint">
-            Status of orders you have placed.
-        </p>
-
+        <p id="orders-hint" class="hint">Status of orders you have placed.</p>
         <p id="orders-message" class="message" role="status" hidden></p>
-
-        <!-- Order history generated by JavaScript -->
         <div id="orders-list" class="stack"></div>
 
-        <!-- Staff-only book management -->
         <div id="staff-tools" hidden>
             <h2>Add or update a book</h2>
-
-            <p class="hint">
-                Add a book, or update a book using its ID.
-                Book IDs appear in book details.
-            </p>
-
+            <p class="hint">Add a book, or update a book by id. Book ID is on the book detail.</p>
             <p id="staff-message" class="message" role="status" hidden></p>
-
             <div class="form-grid">
-
-                <!-- Staff: Add a book -->
                 <form id="add-book-form" class="book-card">
                     <h3>Add a book</h3>
-
                     <label class="field">Title
                         <input id="add-title" type="text" required>
                     </label>
-
                     <label class="field">Author
                         <input id="add-author" type="text" required>
                     </label>
-
                     <label class="field">Price
-                        <input id="add-price" type="number"
-                               min="0" step="0.01" required>
+                        <input id="add-price" type="number" min="0" step="0.01" required>
                     </label>
-
                     <label class="field">Stock
-                        <input id="add-stock" type="number"
-                               min="0" step="1" required>
+                        <input id="add-stock" type="number" min="0" step="1" required>
                     </label>
-
                     <label class="field">ISBN
-                        <input id="add-isbn" type="text"
-                               placeholder="Optional">
+                        <input id="add-isbn" type="text" placeholder="Optional">
                     </label>
-
                     <button type="submit">Add book</button>
                 </form>
 
-                <!-- Staff: Update an existing book -->
                 <form id="update-book-form" class="book-card">
                     <h3>Update a book</h3>
-
-                    <p class="hint">
-                        Only filled fields are sent.
-                    </p>
-
+                    <p class="hint">Only filled fields are sent. Book ID is on the book detail.</p>
                     <label class="field">Book ID
                         <input id="update-id" type="text" required>
                     </label>
-
                     <label class="field">Title
                         <input id="update-title" type="text">
                     </label>
-
                     <label class="field">Author
                         <input id="update-author" type="text">
                     </label>
-
                     <label class="field">Price
-                        <input id="update-price" type="number"
-                               min="0" step="0.01">
+                        <input id="update-price" type="number" min="0" step="0.01">
                     </label>
-
                     <label class="field">Stock
-                        <input id="update-stock" type="number"
-                               min="0" step="1">
+                        <input id="update-stock" type="number" min="0" step="1">
                     </label>
-
                     <label class="field">ISBN
                         <input id="update-isbn" type="text">
                     </label>
-
                     <button type="submit">Update book</button>
                 </form>
             </div>
@@ -345,8 +168,6 @@
     </section>
 </main>
 
-<!-- Existing JavaScript: API requests and functionality -->
 <script src="script.js"></script>
-
 </body>
 </html>
