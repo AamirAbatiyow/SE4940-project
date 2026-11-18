@@ -1,6 +1,6 @@
 const API_BASE = "http://127.0.0.1:8000";
 const TOKEN_KEY = "booknestToken";
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 20;
 
 let currentUser = null;
 let bookQuery = "";
@@ -44,6 +44,131 @@ function el(tag, className, text) {
         node.textContent = text;
     }
     return node;
+}
+
+
+/*
+ * Stores cover results so repeated books do not
+ * trigger another Open Library search.
+ */
+const bookCoverCache = new Map();
+
+/*
+ * Finds a cover using the book's title and author.
+ * Returns an image URL or null if no match exists.
+ */
+async function findBookCover(book) {
+    const title = String(book.title || "").trim();
+    const author = String(book.author || "").trim();
+
+    if (!title) return null;
+
+    const key = (title + "|" + author).toLowerCase();
+
+    // Reuse an existing search, including one in progress.
+    if (bookCoverCache.has(key)) {
+        return bookCoverCache.get(key);
+    }
+
+    const searchPromise = (async function () {
+        try {
+            const params = new URLSearchParams({
+                title: title,
+                limit: "5",
+                fields: "title,author_name,cover_i"
+            });
+
+            if (author) {
+                params.set("author", author);
+            }
+
+            const response = await fetch(
+                "https://openlibrary.org/search.json?" + params
+            );
+
+            if (!response.ok) return null;
+
+            const data = await response.json();
+
+            // Choose the first result that has a cover.
+            const match = (data.docs || []).find(function (item) {
+                return item.cover_i != null;
+            });
+
+            if (!match) return null;
+
+            return (
+                "https://covers.openlibrary.org/b/id/" +
+                match.cover_i +
+                "-M.jpg"
+            );
+        } catch (error) {
+            console.warn("Cover lookup failed:", title, error);
+            return null;
+        }
+    })();
+
+    bookCoverCache.set(key, searchPromise);
+    return searchPromise;
+}
+
+const localBookCovers = {
+    1: "covers/1.jpg"
+};
+function createBookCover(book) {
+    const cover = el("div", "book-cover", book.title || "Book");
+
+    findBookCover(book).then(function (imageUrl) {
+        if (!imageUrl) return;
+
+        const image = document.createElement("img");
+        image.className = "book-cover-image";
+        image.alt = "Cover of " + (book.title || "book");
+        image.decoding = "async";
+
+        image.onload = function () {
+            // Only display the image if it loaded successfully.
+            if (image.naturalWidth > 1) {
+                cover.textContent = "";
+                cover.append(image);
+                cover.classList.add("has-image");
+            }
+        };
+
+        image.onerror = function () {
+            // Leave the original title placeholder visible.
+        };
+
+        // Start loading immediately.
+        image.src = imageUrl;
+    });
+
+    return cover;
+
+    // Check whether this book has a locally saved cover.
+    const localCover = localBookCovers[book.bookId];
+
+    if (localCover) {
+        const image = document.createElement("img");
+        image.className = "book-cover-image";
+        image.alt = "Cover of " + (book.title || "book");
+
+        // Replace the placeholder only when the image loads.
+        image.onload = function () {
+            cover.textContent = "";
+            cover.append(image);
+            cover.classList.add("has-image");
+        };
+
+        // If the local image fails, keep the placeholder.
+        image.onerror = function () {
+            console.warn("Local cover unavailable:", localCover);
+        };
+
+        image.src = localCover;
+        return cover;
+    }
+
 }
 
 function showMessage(id, text, isError) {
@@ -469,8 +594,7 @@ function renderBookCard(book) {
         card.classList.add("selected");
     }
 
-    card.append(el("div", "book-cover", book.title || "Book"));
-    card.append(el("h3", "", book.title || "Untitled"));
+    card.append(createBookCover(book));    card.append(el("h3", "", book.title || "Untitled"));
     card.append(el("p", "", book.author || ""));
     card.append(el("p", "book-price", money(book.price)));
     card.append(el(
@@ -564,8 +688,7 @@ function renderBookDetail(book) {
     panel.hidden = false;
     panel.textContent = "";
     panel.append(closeLink());
-    panel.append(el("div", "book-cover", book.title || "Book"));
-    panel.append(el("h3", "", book.title || "Untitled"));
+    panel.append(createBookCover(book));    panel.append(el("h3", "", book.title || "Untitled"));
     panel.append(el("p", "", book.author || ""));
     panel.append(el("p", "book-price", money(book.price)));
     panel.append(el(
