@@ -502,3 +502,861 @@ textarea {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================
+   FU FLIPS — VISUAL REDESIGN
+   Bold contemporary meets cozy literary
+   ========================================== */
+
+/* 1. Brand colors used throughout the site */
+:root {
+    --espresso: #522F28;
+    --cream: #F5EFE4;
+    --cherry: #A6293A;
+    --pink: #E8B8C1;
+    --white: #FFFCF8;
+    --muted: #75645E;
+    --border: #E3D5CC;
+}
+
+/* 2. Global typography and page background */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cream);
+    color: var(--espresso);
+}
+
+h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+button {
+    transition: background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* 3. Navigation and Fu Flips branding */
+header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 5%;
+    z-index: 10;
+}
+
+nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 24px;
+}
+
+nav h2,
+nav h2 a {
+    color: var(--espresso);
+    font-family: Georgia, serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.brand-dot {
+    color: var(--cherry);
+}
+
+.nav-links a,
+.nav-logout {
+    color: var(--espresso);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-logout:hover,
+.nav-links a.active {
+    color: var(--cherry);
+}
+
+.nav-links a.active {
+    box-shadow: inset 0 -2px 0 var(--cherry);
+}
+
+#nav-user {
+    color: var(--cherry);
+}
+
+/* 4. Hero: Two-column bookstore introduction */
+.hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 48px;
+    padding: 75px 6%;
+    margin: 0 0 60px;
+    background-color: var(--espresso);
+    color: var(--cream);
+    text-align: left;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.hero-label,
+.section-label {
+    color: var(--cherry);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+.hero-label {
+    color: var(--pink);
+}
+
+.hero h1 {
+    color: var(--cream);
+    font-size: clamp(48px, 6vw, 86px);
+    line-height: 1.06;
+    letter-spacing: -2px;
+    margin: 24px 0;
+}
+
+.hero h1 span {
+    color: var(--pink);
+    font-style: italic;
+}
+
+.hero-description {
+    color: #EADDD5;
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 0 30px;
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: var(--cherry);
+    color: white;
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.hero-button:hover {
+    background-color: #861E2C;
+    transform: translateY(-2px);
+}
+
+/* 5. Decorative typography on the hero */
+.hero-art {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    border: 2px solid rgba(232,184,193,0.55);
+    border-radius: 150px 150px 18px 18px;
+    background: radial-gradient(
+            circle at center,
+            #774A4A 0%,
+            #522F28 75%
+    );
+    text-align: center;
+    transform: rotate(3deg);
+}
+
+.hero-art-small,
+.hero-art-bottom {
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    color: var(--pink);
+}
+
+.hero-art-large {
+    font-family: Georgia, serif;
+    font-size: clamp(35px, 5vw, 68px);
+    font-weight: bold;
+    letter-spacing: -3px;
+    line-height: 1.2;
+    color: var(--cream);
+    overflow-wrap: anywhere;
+}
+
+/* 6. Book catalog heading and layout */
+.books-section {
+    padding: 32px 5% 70px;
+    background-color: var(--cream);
+}
+
+.catalog-heading h2 {
+    color: var(--espresso);
+    font-size: clamp(30px, 4vw, 46px);
+    letter-spacing: -1px;
+    margin: 12px 0;
+}
+
+.catalog-heading p {
+    color: var(--muted);
+}
+
+.book-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+/* 7. Book cards: Cozy surfaces and modern borders */
+.book-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 4px 18px rgba(82,47,40,0.04);
+}
+
+.book-grid .book-card {
+    transition: transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.book-grid .book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(82,47,40,0.12);
+}
+
+.book-grid .book-card.selected {
+    outline: 2px solid var(--cherry);
+}
+
+.book-cover {
+    background: linear-gradient(
+            145deg,
+            var(--espresso),
+            #80575C
+    );
+    color: var(--cream);
+    min-height: 185px;
+    border-radius: 10px;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.book-card h3 {
+    color: var(--espresso);
+    font-size: 20px;
+}
+
+.book-price,
+.book-availability.available {
+    color: var(--cherry);
+    font-weight: bold;
+}
+
+/* 8. Primary buttons throughout the application */
+.book-card button,
+.action-button {
+    background-color: var(--cherry);
+    color: white;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.book-card button:hover,
+.action-button:hover {
+    background-color: #861E2C;
+}
+
+.book-card button:disabled,
+.action-button:disabled,
+.book-card button:disabled:hover,
+.action-button:disabled:hover {
+    background-color: #D8CEC8;
+    color: #665B55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 9. Forms, search and input fields */
+.search-row {
+    margin: 30px 0;
+}
+
+.search-row input,
+.field input,
+.field select,
+.field textarea {
+    border: 1px solid var(--border);
+    background-color: var(--white);
+    color: var(--espresso);
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.search-row input:focus,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: 2px solid var(--cherry);
+    border-color: var(--cherry);
+}
+
+.field,
+#books-page {
+    color: var(--espresso);
+}
+
+/* 10. Cart, checkout, login and orders */
+.cart-section,
+.page-section,
+#login,
+#orders {
+    background-color: var(--cream);
+    padding: 55px 5% 80px;
+    min-height: 65vh;
+}
+
+.cart-section h2,
+.page-section h2 {
+    color: var(--espresso);
+    font-size: clamp(30px, 4vw, 44px);
+}
+
+.hint,
+.book-availability {
+    color: var(--muted);
+}
+
+#cart-count,
+.message,
+.review-name,
+.message a,
+.text-link {
+    color: var(--cherry);
+}
+
+.message.error {
+    color: #A6293A;
+}
+
+.cart-line,
+.review {
+    border-bottom-color: var(--border);
+    border-top-color: var(--border);
+}
+
+.order-status {
+    background-color: var(--espresso);
+    color: var(--cream);
+}
+
+/* 11. Mobile and tablet responsiveness */
+@media (max-width: 1000px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 55px 6%;
+    }
+
+    .hero-art {
+        min-height: 200px;
+        max-width: 460px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    .book-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 16px 5%;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-session {
+        flex-wrap: wrap;
+    }
+
+    .hero {
+        margin-bottom: 35px;
+        padding: 45px 7%;
+        gap: 35px;
+    }
+
+    .hero h1 {
+        font-size: 46px;
+    }
+
+    .hero-art {
+        min-height: 170px;
+        transform: none;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .books-section,
+    .cart-section,
+    .page-section {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .cart-line {
+        flex-wrap: wrap;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 12. Keep JavaScript-controlled sections hidden */
+[hidden] {
+    display: none !important;
+}
+
+
+/* FU FLIPS — DESIGN REFINEMENTS */
+
+/* Replace cherry red with a softer dusty rose */
+:root {
+    --cherry: #B77687;
+}
+
+/* Make the homepage hero more compact */
+.hero {
+    padding: 45px 5%;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 5vw, 68px);
+}
+
+.hero-art {
+    min-height: 230px;
+    transform: rotate(2deg);
+}
+
+/* Make book cards align more consistently */
+.book-grid .book-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-grid .book-card button {
+    margin-top: auto;
+}
+
+/* Give the catalog a subtle editorial detail */
+.catalog-heading {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+}
+
+/* Prevent the hero from becoming oversized on phones */
+@media (max-width: 600px) {
+    .hero {
+        padding: 38px 7%;
+    }
+
+    .hero h1 {
+        font-size: 44px;
+    }
+
+    .hero-art {
+        min-height: 160px;
+        transform: none;
+    }
+}
+
+
+
+/* ======================================
+   FU FLIPS — REAL BOOK COVER IMAGES
+   ====================================== */
+
+/* Keep covers consistent across the catalog */
+.book-cover {
+    height: 220px;
+    min-height: 220px;
+    box-sizing: border-box;
+}
+
+/* Give actual cover images a clean background */
+.book-cover.has-image {
+    background: #F0E7DF;
+    padding: 12px;
+}
+
+/* Show the full cover without stretching or cropping */
+.book-cover-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* Give the larger detail view a little more room */
+.book-detail .book-cover {
+    height: 300px;
+    min-height: 300px;
+}
+
+
+/* ========================================
+   FU FLIPS — COMPACT ESPRESSO REFINEMENT
+   ======================================== */
+
+/* Richer coffee-brown color palette */
+:root {
+    --espresso: #38231F;
+    --cherry: #B77687;
+}
+
+/* Keep the overall page comfortable on laptops */
+body {
+    font-size: 14px;
+}
+
+/* Darker brand color */
+.logo,
+.brand,
+.nav-brand {
+    color: #38231F;
+}
+
+/* Slightly smaller book catalog headings */
+#books h1,
+#books h2,
+#catalog h1,
+#catalog h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    line-height: 1.15;
+}
+
+/* More compact book cards */
+.book-card {
+    padding: 16px;
+    gap: 8px;
+}
+
+/* Shorter cover area */
+.book-card .book-cover {
+    height: 175px;
+    min-height: 175px;
+    background: linear-gradient(
+            145deg,
+            #38231F,
+            #725052
+    );
+}
+
+/* Real covers stay fully visible */
+.book-card .book-cover.has-image {
+    background: #F0E8E0;
+}
+
+.book-cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Smaller, cleaner card typography */
+.book-card h3 {
+    font-size: 1.1rem;
+    line-height: 1.25;
+}
+
+.book-card p {
+    font-size: 0.9rem;
+}
+
+/* Compact buttons */
+.book-card button {
+    padding: 11px 14px;
+    font-size: 0.85rem;
+}
+
+/* Reduce excess space in the catalog */
+#book-grid {
+    gap: 16px;
+}
+
+/* Make the decorative hero more compact */
+.hero {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+/* Keep everything readable on mobile */
+@media (max-width: 600px) {
+    .book-card .book-cover {
+        height: 160px;
+        min-height: 160px;
+    }
+
+    .book-card {
+        padding: 14px;
+    }
+}
+
+
+/* ===================================
+   FU FLIPS — MINIMAL BOOK LOGO
+   =================================== */
+
+/* Align the icon with the existing wordmark */
+.brand-book-icon {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    margin-right: 9px;
+    color: #38231F;
+    vertical-align: -3px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+/* Subtle movement when hovering over the logo */
+a:hover .brand-book-icon {
+    transform: rotate(-5deg);
+}
+
+/* ==========================================
+   FU FLIPS — COMPACT EDITORIAL LAYOUT
+   ========================================== */
+
+/* Slightly narrower overall content area */
+main {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Five books per row on wider screens */
+@media (min-width: 1100px) {
+    #book-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+    }
+}
+
+/* Four books on medium screens */
+@media (min-width: 850px) and (max-width: 1099px) {
+    #book-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+    }
+}
+
+/* Two books on smaller screens */
+@media (min-width: 550px) and (max-width: 849px) {
+    #book-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+}
+
+/* One book on narrow phones */
+@media (max-width: 549px) {
+    #book-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* Make book cards more compact */
+.book-card {
+    min-width: 0;
+    padding: 12px;
+    gap: 6px;
+}
+
+/* Shorter covers, with real images fully visible */
+.book-card .book-cover {
+    height: 150px;
+    min-height: 150px;
+}
+
+.book-card .book-cover-image {
+    object-fit: contain;
+}
+
+/* Reduce long-title size */
+.book-card h3 {
+    font-size: 0.98rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+/* Smaller card text */
+.book-card p {
+    font-size: 0.82rem;
+}
+
+/* Keep the button comfortable to click */
+.book-card button {
+    padding: 10px;
+    font-size: 0.82rem;
+}
+
+/* Reduce the hero's visual footprint */
+.hero {
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    padding: 28px 36px;
+    min-height: 0;
+}
+
+/* Smaller hero headings */
+.hero h1 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.1;
+}
+
+/* Compact hero paragraph */
+.hero p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Reduce hero decoration size */
+.hero-art,
+.hero-visual {
+    max-width: 400px;
+}
+
+/* Preserve mobile responsiveness */
+@media (max-width: 700px) {
+    .hero {
+        padding: 24px;
+    }
+}
+
+/* ==========================================
+   FU FLIPS — FIVE-COLUMN LAYOUT FIXES
+   ========================================== */
+
+/* Keep the decorative hero text from breaking */
+.hero-art,
+.hero-visual {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Make decorative heading fit inside its arch */
+.hero-art h2,
+.hero-visual h2 {
+    font-size: clamp(2rem, 3.4vw, 3.5rem);
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+/* Prevent long cover titles from overflowing */
+.book-card .book-cover {
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 12px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    text-align: center;
+}
+
+/* Real cover images should use the available space */
+.book-card .book-cover.has-image {
+    padding: 8px;
+}
+
+/* Keep book titles below the covers readable */
+.book-card h3 {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+/* Slightly reduce the hero artwork on laptops */
+@media (min-width: 900px) {
+    .hero-art,
+    .hero-visual {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+
+/* ==========================================
+   FU FLIPS — COMPACT BOOK CARD HEIGHT
+   ========================================== */
+
+/* Remove unnecessary minimum height and spacing */
+.book-card {
+    min-height: 0;
+    height: auto;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+/* Remove extra margins between book details */
+.book-card h3,
+.book-card p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Keep the Add to Cart button close to the details */
+.book-card button {
+    margin-top: 10px;
+}
+
+/* Prevent cards from stretching to fill a grid row */
+#book-grid {
+    align-items: start;
+}
+
+
+/* Keep cards aligned neatly within each row */
+#book-grid {
+    align-items: stretch;
+}
+
+/* Let each card fill its grid cell */
+.book-card {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Align Add to Cart buttons at the bottom */
+.book-card button {
+    margin-top: auto;
+}
